@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} about {% endblock %}
+
+
+{% block content %}
+<main class="main__contact">
+
+                <form action="" method="POST" target="_blank" id="formulario_contacto">
+                    {% csrf_token %}
+                    <label for="motivo">Motivo de consulta:</label><br>
+                    <select name="motivo" id="motivo">
+                        <option value="" disabled selected>Selecciona un motivo</option>
+                        <option value="Opinión">Opinión</option>
+                        <option value="Solicitar información">Solicitar información</option>
+                        <option value="Problemas de envío">Problemas de envío</option>
+                        <option value="Notificar errores">Notificar errores</option>
+                    </select>
+
+                    <label for="email">E-mail:</label><br>
+                    <input type="email" name="email" id="email" placeholder="Tu correo electrónico"><br>
+
+                    <label for="nombre">Nombre:</label><br>
+                    <input type="text" name="nombre" id="nombre" maxlength="20" placeholder="Tu nombre"><br>
+
+                    <label>Género:</label><br>
+                    <div class="radio-group">
+                        <div class="radio">
+                            <input type="radio" name="genero" value="F" id="genero-f">
+                            <label for="genero-f">F</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" name="genero" value="M" id="genero-m">
+                            <label for="genero-m">M</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" name="genero" value="X" id="genero-x">
+                            <label for="genero-x">X</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" name="genero" value="" id="genero-none" checked>
+                            <label for="genero-none">Otro</label>
+                        </div>
+                    </div>
+
+
+                    <label for="mensaje">Mensaje:</label><br>
+                    <textarea name="mensaje" id="mensaje" placeholder="Escribe aquí tu mensaje" rows="6"></textarea><br>
+
+                    <label for="miArchivo">Seleccione una imagen jpeg o png:</label>
+                    <input type="file" id="miArchivo" name="miArchivo" multiple><br>
+
+                    <button type="submit" onclick="validar()">
+                        <span>Enviar</span>
+                    </button>
+
+                </form>
+            </main>
+
+{% comment %} Agrego script JS para validar formulario {% endcomment %}
+{% block script %} <script src="{% static 'js/validate_form.js' %}"></script> {% endblock %}
+
+{% endblock %}

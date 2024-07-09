@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Products {% endblock %}
+
+{% block content %}
+<div class="filters">
+    <input type="button" value="Madera" id="filtro_madera">
+    <input type="button" value="Bazar" id="filtro_bazar">
+    <input type="button" value="Deco" id="filtro_deco">
+    {% comment %} <input type="button" value="Todo" id="filtro_todo"> {% endcomment %}
+</div>
+
+<div class="cards">
+    {% for product in products %}
+        <div class="card" data-category="{{ product.category }}">
+            {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'img/default_image.jpg' %}" alt="Imagen por defecto">
+                {% endif %}
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">{{ product.price|floatformat:2 }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/script_filter.js' %}"></script>
+{% endblock %}
